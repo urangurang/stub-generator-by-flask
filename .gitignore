@@ -23,4 +23,4 @@
 
 # Virtual Env
 blogVenv/*
-__pycache__/*
+*.pyc

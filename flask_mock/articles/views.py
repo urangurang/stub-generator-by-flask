@@ -1,22 +1,14 @@
-# -*- coding:utf-8 -*-
-
-import json
-
-from flask import Flask, send_from_directory, Response
-from flask_cors import CORS
-
-app = Flask(__name__)
-
-CORS(app)
+from flask import send_from_directory, Response
+from flask_mock import app
 
 STATIC_PATH = "static/mock/"
 DETAIL_PATH = "articles/"
 BIC_POINT = "/user/linkage/bicpoint"
 
 
-@app.route('/')
-def hello_world():
-    return 'Hello World!'
+@app.route("/d")
+def wad():
+    return "!@#@!#"
 
 
 @app.route(BIC_POINT, methods=['GET', 'POST'])
@@ -32,9 +24,6 @@ def cancel_card():
 
 @app.route("/articles/")
 def articles():
-    print("!!!!")
-    return send_from_directory(STATIC_PATH + DETAIL_PATH, "all.json")
+    return send_from_directory(STATIC_PATH + DETAIL_PATH, "articles.json")
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)

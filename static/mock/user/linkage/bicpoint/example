@@ -1,0 +1,30 @@
+{
+  "status" : true  // exist Card
+}
+
+{
+  "status" : false  // Not exist Card
+}
+
+//
+{
+    "error": "404",
+    "error_description": "Not Found"
+}
+
+{
+    "error": "401",
+    "error_description": "Unauthorized"
+}
+
+// No Cookie
+{
+    "error": "500",
+    "error_description": "Internal Server Error"
+}
+
+// 500
+{
+    "error": "BIC-LINKAGE-C-001-0009",
+    "error_description": "迷惑をおかけします。システムエラーが発生しました。"
+}

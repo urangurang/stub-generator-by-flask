@@ -1,29 +1,19 @@
-from flask import send_from_directory, Response
+from flask import request, send_from_directory
 from flask_mock import app
 
-STATIC_PATH = "static/mock/"
-DETAIL_PATH = "articles/"
-BIC_POINT = "/user/linkage/bicpoint"
 
-
-@app.route("/d")
-def wad():
-    return "!@#@!#"
-
-
-@app.route(BIC_POINT, methods=['GET', 'POST'])
-def cancel_card():
-    with open(STATIC_PATH + BIC_POINT + "/post.json") as f:
-        data = f.read()
-    res = Response()
-    res.set_data(data)
-    res.status_code = 200
-    res.mimetype = 'application/json'
-    return res
-
-
-@app.route("/articles/")
+@app.route("/articles", methods=['POST', 'GET'])
 def articles():
-    return send_from_directory(STATIC_PATH + DETAIL_PATH, "articles.json")
-
-
+    if request.method == "GET":
+        print("/articles GET")
+        with open('static/mock/articles/GET') as f:
+            pass
+    elif request.method == "POST":
+        with open('static/mock/articles/POST') as f:
+            pass
+    elif request.method == "PUT":
+        with open('static/mock/articles/PUT') as f:
+            pass
+    elif request.method == "DELETE":
+        with open('static/mock/articles/DELETE') as f:
+            pass

@@ -5,26 +5,32 @@ ROOT_PATH = os.getcwd()
 
 STATIC_PATH = "static/mock"
 
-IMPORT_PATH = """from flask import request, send_from_directory
+IMPORT_PATH = """from flask import Response, request
 from flask_mock import app
 
 """
 
 DEF_FORMAT = """
+@app.route("{0}/<filename>/", methods={1})
 @app.route("{0}", methods={1})
-def {2}():
+def {2}(filename):
+    res = Response() 
+    res.mimetype = "application/json"
+    body = ""
     if request.method == "GET":
-        with open('{3}{4}/GET') as f:
-            pass
+        with open('{3}{4}/GET/' + filename + '.json') as f:
+            body = f.read()
     elif request.method == "POST":
-        with open('{3}{4}/POST') as f:
+        with open('{3}{4}/POST/post.json') as f:
             pass
     elif request.method == "PUT":
-        with open('{3}{4}/PUT') as f:
+        with open('{3}{4}/PUT/put.json') as f:
             pass
     elif request.method == "DELETE":
-        with open('{3}{4}/DELETE') as f:
+        with open('{3}{4}/DELETE/delete/json') as f:
             pass
+    res.data = body
+    return res
 """
 
 INIT_FORMAT = """# -*- coding:utf-8 -*-
@@ -36,7 +42,7 @@ app = Flask(__name__)
 CORS(app)
 
 import flask_mock.views
-{}
+{0}
 
 
 if __name__ == '__main__':
@@ -47,7 +53,7 @@ will_be_imported_views = []
 CURRENT_PATH = os.getcwd()
 
 for root, methods, files in os.walk(STATIC_PATH):
-    if 'end' in files:
+    if 'response.yaml' in files:
         route = root.replace(STATIC_PATH, "")
         package = route.replace("/", "_")[1:]
         DEF = DEF_FORMAT.format(route, methods.__str__(), package, STATIC_PATH, route)

@@ -24,6 +24,6 @@
 # Virtual Env
 blogVenv/*
 *.pyc
-
 flask_mock/*
 !flask_mock/views.py
+.DS_Store

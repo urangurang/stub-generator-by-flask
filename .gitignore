@@ -26,5 +26,4 @@ blogVenv/*
 *.pyc
 
 flask_mock/*
-!flask_mock/__init__.py
 !flask_mock/views.py

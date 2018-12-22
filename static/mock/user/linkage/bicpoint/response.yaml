@@ -1,7 +1,0 @@
-GET:
-  status_code: 200
-  charset: utf-8
-
-POST:
-  status_code: 404
-  charset: utf-8

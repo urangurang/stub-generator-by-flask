@@ -5,32 +5,10 @@ ROOT_PATH = os.getcwd()
 
 STATIC_PATH = "static/mock"
 
-IMPORT_PATH = """from flask import Response, request
+IMPORT_PATH = """import yaml
+from flask import Response, request
 from flask_mock import app
 
-"""
-
-DEF_FORMAT = """
-@app.route("{0}/<filename>/", methods={1})
-@app.route("{0}", methods={1})
-def {2}(filename):
-    res = Response() 
-    res.mimetype = "application/json"
-    body = ""
-    if request.method == "GET":
-        with open('{3}{4}/GET/' + filename + '.json') as f:
-            body = f.read()
-    elif request.method == "POST":
-        with open('{3}{4}/POST/post.json') as f:
-            pass
-    elif request.method == "PUT":
-        with open('{3}{4}/PUT/put.json') as f:
-            pass
-    elif request.method == "DELETE":
-        with open('{3}{4}/DELETE/delete/json') as f:
-            pass
-    res.data = body
-    return res
 """
 
 INIT_FORMAT = """# -*- coding:utf-8 -*-
@@ -47,6 +25,38 @@ import flask_mock.views
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
+"""
+
+DEF_FORMAT = """
+@app.route("{0}/<filename>/", methods={1})
+@app.route("{0}/", methods={1})
+def {2}(filename=None):
+    with open('{3}{4}/response.yaml') as f:
+        res_property = yaml.load(f)
+    
+    res = Response() 
+    try: 
+        res.status_code = res_property[request.method]["status_code"]
+    except Exception:
+        res.status_code = 200
+    
+    try:
+        res.mimetype = res_property[request.method]["mimetype"]
+    except Exception:
+        res.mimetype = "application/json"
+        
+    if request.method == "GET":
+        if filename is None:
+            with open('{3}{4}/GET/get.json') as f:
+                res.data = f.read()
+        else:
+            with open('{3}{4}/GET/' + filename + '.json') as f:
+                res.data = f.read()
+    elif request.method == "POST":
+        with open('{3}{4}/POST/post.json') as f:
+            pass
+            
+    return res
 """
 
 will_be_imported_views = []

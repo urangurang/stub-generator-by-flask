@@ -27,3 +27,7 @@ blogVenv/*
 flask_mock/*
 !flask_mock/views.py
 .DS_Store
+
+
+static/mock/*
+!static/mock/example

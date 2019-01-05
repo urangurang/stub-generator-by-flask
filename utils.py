@@ -22,9 +22,6 @@ CORS(app, supports_credentials=True)
 import flask_stub.views
 {0}
 
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
 """
 
 DEF_FORMAT = """

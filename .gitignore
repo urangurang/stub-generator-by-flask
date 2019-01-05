@@ -24,6 +24,7 @@
 *.pyc
 flask_stub/*
 !flask_stub/views.py
+!flask_stub/__init__.py
 .DS_Store
 static/mock/*
 !static/mock/example

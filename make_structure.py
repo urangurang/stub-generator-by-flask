@@ -1,7 +1,6 @@
 import os
 from pathlib import Path
 
-
 ROOT_PATH = os.getcwd()
 STATIC_PATH = "static/mock"
 IMPORT_PATH = """import yaml
@@ -52,11 +51,12 @@ def {2}(filename=None):
             
     return res
 """
-will_be_imported_views = []
+
 CURRENT_PATH = os.getcwd()
 
 
 def create_stub_views():
+    will_be_imported_views = []
     for root, methods, files in os.walk(STATIC_PATH):
         if 'response.yaml' in files:
             route = root.replace(STATIC_PATH, "")
@@ -82,7 +82,3 @@ def create_stub_views():
 
     with open(CURRENT_PATH + "/flask_mock/__init__.py", "w") as f:
         f.write(INIT_FORMAT.format("\n".join(will_be_imported_views)))
-
-
-if __name__ == "__main__":
-    create_stub_views()

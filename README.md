@@ -24,13 +24,13 @@ I'll make an endpoint to be tested.
 - `touch static/mock/articles/response.yaml`
 - You must make the `response.yaml`. Because this application makes a controller(view.py) when `response.yaml` exist under static folder. 
 - It should be located in same level with method folder
-- \- articles
-     - GET
-        - 1.json
-        - 2.json
-        - get.json
-     - POST
-     - *response.yaml* 
+- / articles
+     - / GET
+        - / 1.json
+        - / 2.json
+        - / get.json
+     - / POST
+     - / *response.yaml* 
 
  
 ```bash

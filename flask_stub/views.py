@@ -1,4 +1,4 @@
-from flask_mock import app
+from flask_stub import app
 
 
 @app.route('/')

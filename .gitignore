@@ -21,13 +21,9 @@
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
 
-# Virtual Env
-blogVenv/*
 *.pyc
-flask_mock/*
-!flask_mock/views.py
+flask_stub/*
+!flask_stub/views.py
 .DS_Store
-
-
 static/mock/*
 !static/mock/example
